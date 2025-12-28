@@ -1,0 +1,421 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "demos/demo1.css";        /* Must be BEFORE utilities */
+
+/* Demos */
+:root {
+  /* Light Mode Colors */
+  --color-bg: #ffffff;
+  --color-text: #374151;
+  --color-border: #d1d5db;
+  --color-border-focus: #3b82f6;
+  --color-bg-hover: #f3f4f6;
+  --color-bg-active: #e5e7eb;
+  --color-shadow: 0 1px 2px 0 rgba(116, 70, 70, 0.05);
+}
+
+/* Cross-browser compatibility fallbacks */
+html, :host {
+  /* Safari/iOS zoom text sizing */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Tailwind-like utilities need vendor prefixes on some browsers */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.select-text {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Map/overlay SVG selections (Leaflet, etc.) */
+.leaflet-overlay-pane svg {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Leaflet: prevent image dragging/selection across engines */
+.leaflet-container img,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  -webkit-user-drag: none; /* WebKit */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode Colors */
+    --color-w-bg: #1f2937;
+    --color-w-text: #e5e7eb;
+    --color-w-border: #4b5563;
+    --color-w-border-focus: #60a5fa;
+    --color-w-bg-hover: #374151;
+    --color-w-bg-active: #4b5563;
+    --color-w-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+/* Global Custom Scrollbar for Light & Dark Mode */
+:root {
+--scrollbar-bg: #e0e0e0; /* Light Mode Background */
+--scrollbar-thumb: #888; /* Light Mode Thumb */
+--scrollbar-hover: #555; /* Light Mode Hover */
+}
+
+
+/* Scrollbar Styling for Webkit Browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+width: 8px;
+}
+
+::-webkit-scrollbar-track {
+background: var(--scrollbar-bg);
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+background: var(--scrollbar-thumb);
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: var(--scrollbar-hover);
+}
+:root {
+--primary: #ffffff; /* Light mode background */
+--primary-hover: #f0f0f0; /* Light mode hover background */
+--hover-border: #cccccc; /* Light mode hover border */
+--border: #dddddd; /* Light mode default border */
+--text: #333333; /* Light mode text color */
+--menu-bg: #ffffff; /* Light mode menu background */
+--menu-w-bg: #b3b1b1; /* Light mode menu background */
+--option-hover: #f0f0f0; /* Light mode option hover background */
+--selected-text: #000000; /* Light mode selected text */
+--scrollbar-bg: #f0f0f0; /* Light mode scrollbar background */
+--scrollbar-thumb: #cccccc; /* Light mode scrollbar thumb */
+--scrollbar-hover: #bbbbbb; /* Light mode scrollbar hover */
+--menu-d-bg: #ffff; /* Light mode menu background */
+--border-colorr:#d1cdcd;
+--editor-bg: #fff;
+--editor-toolbar-bg: #f3f4f6;
+--editor-toolbar-border: #e5e7eb;
+--editor-text: #111827;
+
+}
+
+@media (prefers-color-scheme: dark) {
+.dark {
+  --primary: #1a1a1a; /* Dark mode background */
+  --primary-hover: #2a2a2a; /* Dark mode hover background */
+  --hover-border: #444444; /* Dark mode hover border */
+  --border: #333333; /* Dark mode default border */
+  --text: #ffffff; /* Dark mode text color */
+  --menu-bg: #1a1a1a; /* Dark mode menu background */
+  --option-hover: #2a2a2a; /* Dark mode option hover background */
+  --selected-text: #ffffff; /* Dark mode selected text */
+  --scrollbar-bg: #2a2a2a; /* Dark mode scrollbar background */
+  --scrollbar-thumb: #444444; /* Dark mode scrollbar thumb */
+  --scrollbar-hover: #555555; /* Dark mode scrollbar hover */
+  --menu-w-bg: #9A9CAE; /* Light mode menu background */
+  --menu-d-bg: #1F212A; /* Light mode menu background */
+  --border-colorr:#666666;
+}
+}
+.dark {
+--primary: #1a1a1a; /* Dark mode primary background */
+--primary-hover: #333333; /* Dark mode primary hover */
+--hover-border: #555555; /* Dark mode hover border */
+--border: #444444; /* Dark mode default border */
+--text: #ffffff; /* Dark mode text color */
+--menu-bg: #1F212A; /* Dark mode menu background */
+--option-hover: #333333; /* Dark mode option hover */
+--selected-text: #ffffff; /* Dark mode selected text */
+--scrollbar-thumb: #555555; /* Dark mode scrollbar thumb */
+--scrollbar-bg: #1a1a1a; /* Dark mode scrollbar background */
+  --editor-bg: #1f212a;
+  --editor-toolbar-bg: #131212;
+  --editor-toolbar-border: #505050;
+  --editor-text: #fff;
+
+}
+
+.modal {
+display: flex !important; /* Ensure modal is displayed */
+visibility: visible !important;
+opacity: 1 !important;
+z-index: 9999 !important;
+position: fixed !important;
+
+}
+/* Custom styling for mui-tel-input dropdown */
+.MuiPaper-root {
+background-color: var(--menu-bg) !important; /* ✅ Fix dropdown white issue */
+border: 1px solid var(--border-border) !important;
+border-radius: 8px !important;
+min-height: 180px !important; /* ✅ Set minimum height */
+max-height: 250px !important; /* ✅ Set max height */
+min-width: 37% !important; /* ✅ Adjust width */
+overflow-y: auto !important; /* ✅ Enable scrolling */
+position: absolute !important;
+/* bottom: 0%; */
+z-index: 9999 !important; /* ✅ Ensure it's above other elements */
+
+}
+
+.MuiMenuItem-root {
+color: var(--text) !important; /* ✅ Ensures text color is correct */
+display: flex;
+align-items: center;
+padding: 10px;
+}
+
+.custom-phone-dropdown .MuiMenuItem-root img {
+width: 20px; /* ✅ Ensure flag size is correct */
+margin-right: 10px;
+}
+
+.custom-phone-dropdown .MuiMenuItem-root:hover {
+background-color: var(--border-hover-border) !important; /* ✅ Hover effect */
+}
+/* Fix country code visibility in dark mode */
+.MuiMenuItem-root {
+color: var(--text) !important; /* ✅ Ensure all text is visible */
+display: flex;
+justify-content: space-between; /* ✅ Space between country and code */
+align-items: center;
+padding: 10px;
+}
+
+/* Ensure the country code (`+111`) is always visible */
+.MuiTypography-root {
+color: var(--text) !important; /* ✅ Fixes dark text issue */
+opacity: 1 !important; /* ✅ Prevents Material-UI from dimming it */
+}
+
+
+
+.gradient-border {
+    
+    height: 2px;
+    background-image: repeating-linear-gradient(
+      to right,
+      #585858 0,
+      #585858 10px,
+      transparent 10px,
+      transparent 20px,
+      #585858 20px,
+      #585858 30px,
+      transparent 30px,
+      transparent 40px
+    );
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    }
+    .gradient-border2 {
+        border-image: linear-gradient(to right,#5C5E9B, #7CFAF7 ) 1;
+        border-top: 2px dashed gray;
+        border-image-slice: 1;
+      }
+      .bg-gradient-primary {
+        background-image: linear-gradient(310deg, #7CFAF7, #5C5E9B);
+        transition: all 0.3s ease-in-out;
+        
+    }
+    
+    /* .btn-primary:hover,.btn.bg-gradient-primary:hover {
+      background-color: #5C5E9B;
+      border-color: #5C5E9B;
+      padding-inline:  2rem ;
+  } */
+    .btn.bg-gradient-primary:hover {
+      background-color: #5C5E9B;
+      border-color: #5C5E9B;
+      padding-inline:  2rem ;
+
+  }
+  .btn-primary .btn.bg-outline-primary,.btn.bg-gradient-primary .btn.bg-outline-primary {
+    border: 1px solid #5C5E9B
+}
+.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.btn.bg-gradient-primary:not(:disabled):not(.disabled).active,.btn.bg-gradient-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle,.show>.btn.bg-gradient-primary.dropdown-toggle {
+  color: color-yiq(#5C5E9B);
+  background-color: #5C5E9B
+}
+.btn-primary.focus,.btn-primary:focus,.btn.bg-gradient-primary.focus,.btn.bg-gradient-primary:focus {
+  color: #fff
+}
+.fixed-plugin .btn.bg-gradient-primary:not(:disabled):not(.disabled) {
+  border: 1px solid transparent
+}
+.bg-gradient-primary {
+  background-image: linear-gradient(310deg,#7CFAF7 ,#5C5E9B)
+}
+.fixed-plugin .btn.bg-gradient-primary:not(:disabled):not(.disabled):not(.active) {
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #5C5E9B;
+  color: #5C5E9B
+}
+/* Light/Dark Mode support for react-date-range inside .custom-range-picker */
+.custom-range-picker .rdrDateRangePickerWrapper {
+  background-color: inherit;
+  color: inherit;
+}
+
+
+.custom-range-picker .rdrDay {
+  background-color: transparent;
+  border-radius: 0.375rem;
+  color: inherit;
+}
+
+.custom-range-picker .rdrDayNumber span {
+  color: inherit;
+}
+
+.custom-range-picker .rdrDayToday .rdrDayNumber span {
+  border-radius: 50%;
+  
+}
+
+.custom-range-picker .rdrDaySelected,
+.custom-range-picker .rdrDayInRange {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+.custom-range-picker .rdrDayPassive {
+  color: #9ca3af !important;
+}
+
+.custom-range-picker .rdrDefinedRangesWrapper,
+.custom-range-picker button {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  color: inherit;
+}
+
+.custom-range-picker .rdrDateDisplayWrapper {
+  background-color: transparent;
+  color: inherit;
+}
+.custom-range-picker .rdrCalendarWrapper {
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-colorr);
+}
+
+.custom-range-picker .rdrMonth {
+  padding: 0 1rem;
+}
+
+.custom-range-picker select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='%23cccccc' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+  padding: 0.25rem 1.2rem;
+}
+.custom-range-picker .rdrMonthAndYearPickers select {
+  background-color: var(--menu-bg);
+  color: var(--text); /* ✅ FIXED: Use your theme text variable */
+  border: 1px solid #374151;
+  padding: 0.25rem 1.2rem;
+  border-radius: 0.375rem;
+  direction: ltr !important;
+  text-align: left !important;
+  text-align-last: left !important;
+}
+
+.custom-range-picker .rdrMonthAndYearPickers select option {
+  background-color: var(--menu-bg);
+  color: var(--text); /* ✅ FIXED */
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Extra specificity to force year dropdown content left-aligned */
+.custom-range-picker .rdrYearPicker select {
+  direction: ltr !important;
+  text-align: left !important;
+  text-align-last: left !important;
+}
+
+
+/* this style for animation for flwo bit date picker */
+.datepicker-dropdown {
+  transition: opacity 0.3s ease-in-out;
+}
+
+@custom-variant dark (&:is(.dark *));
+.datepicker,.datepicker-dropdown,.flowbite-datepicker-popup{z-index:99999!important}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow{
+  border: 1px solid var(--editor-toolbar-border) !important;
+}
+.ql-toolbar.ql-snow{
+  border: 1px solid var(--editor-toolbar-border) !important;
+}
+.custom-quill-editor .ql-toolbar {
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: var(--editor-toolbar-bg);
+}
+.custom-quill-editor .ql-container {
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: var(--editor-bg);
+  min-height: 100px;
+  font-size: 1rem;
+  color: var(--editor-text);
+}
+.custom-quill-editor .ql-picker-label {
+  color: var(--editor-text);
+  background: transparent;
+  border-radius: 0.375rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.custom-quill-editor .ql-picker-label:hover,
+.custom-quill-editor .ql-picker-label.ql-active {
+  background: var(--editor-toolbar-bg);
+  color: var(--editor-text);
+}.custom-quill-editor .ql-toolbar .ql-formats {
+  background: transparent;
+  border-radius: 0.375rem;
+  margin-right: 0.5rem;
+  padding: 0.15rem 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem; /* space between buttons */
+  transition: background 0.2s;
+  color: var(--editor-text);
+}
+
+.custom-quill-editor .ql-toolbar .ql-formats:hover {
+  background: var(--editor-toolbar-bg);
+}
+
+
+.ql-editor.ql-blank::before {
+  color: var(--editor-text) !important;
+  content: attr(data-placeholder);
+  font-style: italic;
+  left: 15px;
+  pointer-events: none;
+  position: absolute;
+  right: 15px;
+}
+
