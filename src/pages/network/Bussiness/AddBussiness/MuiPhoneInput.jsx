@@ -6,8 +6,8 @@ const StyledMuiTelInput = styled(MuiTelInput)(({ theme }) => ({
     backgroundColor: "var(--menu-bg)", // ✅ Matches other fields
     color: "var(--text)", // ✅ Ensures white text in dark mode
     borderRadius: "8px", // ✅ Rounded corners to match other fields
-    border: "2px solid var(--border-colorr)", // ✅ Same border as others
-    padding: "0", // ✅ Ensures height consistency
+    border: "1px solid var(--tw-gray-400)", // ✅ Same border as others
+    padding: "0 0 0 1rem", // ✅ Ensures height consistency
     fontSize: "1rem", // ✅ Matches text size
     height: "41px", // ✅ Matches other inputs' height
     transition: "border-color 0.3s ease",
@@ -25,8 +25,24 @@ const StyledMuiTelInput = styled(MuiTelInput)(({ theme }) => ({
   "& .MuiInputAdornment-root": {
     backgroundColor: "var(--menu-bg)", // ✅ Background for country code section
     borderRadius: "8px 0 0 8px",
-    padding: "6px 8px",
     color: "var(--text)", // ✅ Text color for country code
+    position: "relative",
+    // Add caret icon after the flag
+    "&::after": {
+      content: '""',
+      display: "inline-block",
+      marginLeft: "4px",
+      marginRight: "4px",
+      borderLeft: "4px solid transparent",
+      borderRight: "4px solid transparent",
+      borderTop: "4px solid var(--text)",
+      verticalAlign: "middle",
+    },
+    // RTL support
+    "[dir='rtl'] &::after": {
+      marginLeft: "4px",
+      marginRight: "4px",
+    },
   },
   "& .MuiSvgIcon-root": {
     color: "var(--text)", // ✅ Icon color matches dark mode
@@ -43,14 +59,12 @@ const StyledMuiTelInput = styled(MuiTelInput)(({ theme }) => ({
     backgroundColor: "var(--menu-bg) !important", // ✅ Fix dropdown white issue
     border: "1px solid var(--border-border) !important",
     borderRadius: "8px",
-    // height:"50px",
     minHeight: "180px !important", // ✅ Set a minimum height
     maxHeight: "250px !important", // ✅ Limit dropdown height
     overflowY: "auto", // ✅ Enable scrolling if needed
     position: "absolute",
     zIndex: "9999 !important",
-    Bottom:"0",
-    // transform: "translateY(40px) !important", // ✅ Push dropdown below the phone input
+    Bottom: "0",
   },
   "& .MuiMenuItem-root": {
     color: "var(--text) !important", // ✅ Ensures text color is correct
@@ -60,28 +74,29 @@ const StyledMuiTelInput = styled(MuiTelInput)(({ theme }) => ({
     "& img": {
       width: "20px", // ✅ Ensure flag size is correct
       marginRight: "10px",
+      // RTL support for flag
+      "[dir='rtl'] &": {
+        marginRight: "0",
+        marginLeft: "10px",
+      },
     },
     "&:hover": {
       backgroundColor: "var(--border-hover-border) !important", // ✅ Hover effect
     },
     "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-        borderColor: "var(--border-hover-border) !important",
-      },
-    
+      borderColor: "var(--border-hover-border) !important",
+    },
   },
   "& .MuiPopper-root": {
     zIndex: "9999 !important",
     position: "absolute",
-
-     // ✅ Ensure dropdown appears above everything
   },
-
 }));
 
 const MuiPhoneInput = ({ value, onChange }) => {
   return (
     <StyledMuiTelInput
-      defaultCountry="EG" // ✅ Default to Saudi Arabia
+      defaultCountry="EG" // ✅ Default to Egypt
       value={value}
       typeof="tel"
       onChange={onChange}

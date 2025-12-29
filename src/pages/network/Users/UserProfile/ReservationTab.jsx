@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router";
+import { DateRangeFilter, KeenIcon } from "@/components";
 import axios from "axios";
-import { DataGrid, KeenIcon } from "@/components";
-import { useNavigate } from "react-router-dom";
-import { DateRangeFilter } from "@/components";
 import { toAbsoluteUrl } from "@/utils";
-const ReservationsContent = () => {
+import { DataGrid } from "@/components";
+
+const ReservationTab = ({ personUid = null }) => {
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -17,19 +18,6 @@ const ReservationsContent = () => {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const navigate = useNavigate();
-
-  // Debounce logic
-  useEffect(() => {
-    setTriggerFetch((prev) => prev + 1);
-  }, [fromDate, toDate, searchStatus, debouncedSearch]);
-
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 400); // debounce delay
-
-    return () => clearTimeout(delayDebounce);
-  }, [search]);
 
   const columns = useMemo(
     () => [
@@ -219,6 +207,7 @@ const ReservationsContent = () => {
         searchStatus
           ? `&filter[booking_status]=${encodeURIComponent(searchStatus)}`
           : "",
+        personUid ? `&filter[person_uid]=${personUid}` : "",
       ].join("");
 
       const baseUrl = `${import.meta.env.VITE_APP_API_URL}/reservations/list?sort=${sortDir}${sortKey}&sort2=${sortDir2}${sortKey2}&sort3=${sortDir3}${sortKey3}&sort4=${sortDir4}${sortKey4}&sort5=${sortDir5}${sortKey5}&perPage=${pageSize}&page=${pageIndex + 1}${baseFilters}`;
@@ -330,4 +319,4 @@ const ReservationsContent = () => {
   );
 };
 
-export { ReservationsContent };
+export default ReservationTab;

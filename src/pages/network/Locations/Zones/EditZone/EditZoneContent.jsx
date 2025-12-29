@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import 'leaflet/dist/leaflet.css';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { CitySelect } from '../AddZone/CitySelect';
-import { CountrySelect } from '../AddZone/CountrySelect';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import "leaflet/dist/leaflet.css";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { CitySelect } from "../AddZone/CitySelect";
+import { CountrySelect } from "../AddZone/CountrySelect";
+import { useParams } from "react-router-dom";
 
 const EditZoneContent = () => {
   const { id } = useParams();
@@ -20,18 +20,18 @@ const EditZoneContent = () => {
 
   const formik = useFormik({
     initialValues: {
-      zone_name_en: '',
-      zone_name_ar: '',
-      city_uid: '',
-      country_uid: ''
+      zone_name_en: "",
+      zone_name_ar: "",
+      city_uid: "",
+      country_uid: "",
     },
     validationSchema: Yup.object({
-      zone_name_en: Yup.string().required('Zone name in English is required'),
-      zone_name_ar: Yup.string().required('Zone name in Arabic is required'),
-      city_uid: Yup.string().required('City is required'),
+      zone_name_en: Yup.string().required("Zone name in English is required"),
+      zone_name_ar: Yup.string().required("Zone name in Arabic is required"),
+      city_uid: Yup.string().required("City is required"),
     }),
     onSubmit: (values) => {
-      console.log('Form submitted:', values);
+      console.log("Form submitted:", values);
     },
   });
 
@@ -39,9 +39,13 @@ const EditZoneContent = () => {
     const fetchZoneData = async () => {
       try {
         setInitialLoading(true);
-        const token = JSON.parse(localStorage.getItem(
-          import.meta.env.VITE_APP_NAME + '-auth-v' + import.meta.env.VITE_APP_VERSION
-        ))?.access_token;
+        const token = JSON.parse(
+          localStorage.getItem(
+            import.meta.env.VITE_APP_NAME +
+              "-auth-v" +
+              import.meta.env.VITE_APP_VERSION
+          )
+        )?.access_token;
 
         // Fetch zone data
         const response = await axios.get(
@@ -55,38 +59,43 @@ const EditZoneContent = () => {
 
         if (response.data.success && response.data.data.length > 0) {
           const zoneData = response.data.data[0];
-          
+
           // Extract zone names from the new structure
-          const zoneNameEn = zoneData?.name?.en || '';
-          const zoneNameAr = zoneData?.name?.ar || '';
-          
+          const zoneNameEn = zoneData?.name?.en || "";
+          const zoneNameAr = zoneData?.name?.ar || "";
+
           // Extract country and city ids directly from the response
-          const countryId = zoneData?.country?.id ? zoneData.country.id.toString() : '';
-          const cityId = zoneData?.city?.id ? zoneData.city.id.toString() : '';
+          const countryId = zoneData?.country?.id
+            ? zoneData.country.id.toString()
+            : "";
+          const cityId = zoneData?.city?.id ? zoneData.city.id.toString() : "";
 
           // Set zone names immediately
-          formik.setFieldValue('zone_name_en', zoneNameEn);
-          formik.setFieldValue('zone_name_ar', zoneNameAr);
-          
+          formik.setFieldValue("zone_name_en", zoneNameEn);
+          formik.setFieldValue("zone_name_ar", zoneNameAr);
+
           // Set country first
           if (countryId) {
-            formik.setFieldValue('country_uid', countryId);
-            
+            formik.setFieldValue("country_uid", countryId);
+
             // Store city ID to set after cities are loaded for the country
             if (cityId) {
               setPendingCityId(cityId);
             }
           } else {
-            enqueueSnackbar('Could not find country information.', { variant: 'warning' });
+            enqueueSnackbar("Could not find country information.", {
+              variant: "warning",
+            });
           }
-          
         } else {
-            enqueueSnackbar('Zone not found or data is empty.', { variant: 'warning' });
+          enqueueSnackbar("Zone not found or data is empty.", {
+            variant: "warning",
+          });
         }
       } catch (error) {
-        console.error('Error fetching zone data:', error);
-        console.error('Error response:', error.response?.data);
-        enqueueSnackbar('Failed to load zone data', { variant: 'error' });
+        console.error("Error fetching zone data:", error);
+        console.error("Error response:", error.response?.data);
+        enqueueSnackbar("Failed to load zone data", { variant: "error" });
       } finally {
         setInitialLoading(false);
       }
@@ -104,9 +113,13 @@ const EditZoneContent = () => {
       if (pendingCityId && formik.values.country_uid) {
         try {
           // Fetch cities for the country to ensure they're loaded
-          const token = JSON.parse(localStorage.getItem(
-            import.meta.env.VITE_APP_NAME + '-auth-v' + import.meta.env.VITE_APP_VERSION
-          ))?.access_token;
+          const token = JSON.parse(
+            localStorage.getItem(
+              import.meta.env.VITE_APP_NAME +
+                "-auth-v" +
+                import.meta.env.VITE_APP_VERSION
+            )
+          )?.access_token;
 
           const response = await axios.get(
             `${import.meta.env.VITE_APP_API_URL}/cities/list?filter[country_uid]=${formik.values.country_uid}`,
@@ -119,19 +132,21 @@ const EditZoneContent = () => {
 
           const cities = response.data?.data || [];
           // Check if the pending city exists in the fetched cities
-          const cityExists = cities.some(city => city.id.toString() === pendingCityId);
-          
+          const cityExists = cities.some(
+            (city) => city.id.toString() === pendingCityId
+          );
+
           if (cityExists) {
             // Now set the city_uid since cities are loaded
-            formik.setFieldValue('city_uid', pendingCityId);
+            formik.setFieldValue("city_uid", pendingCityId);
             setPendingCityId(null);
           }
         } catch (error) {
-          console.error('Error fetching cities for city selection:', error);
+          console.error("Error fetching cities for city selection:", error);
           // Fallback: try setting it anyway after a delay
           setTimeout(() => {
             if (pendingCityId) {
-              formik.setFieldValue('city_uid', pendingCityId);
+              formik.setFieldValue("city_uid", pendingCityId);
               setPendingCityId(null);
             }
           }, 1000);
@@ -147,7 +162,7 @@ const EditZoneContent = () => {
     try {
       // Run validation first
       const errors = await formik.validateForm();
-  
+
       if (Object.keys(errors).length > 0) {
         formik.setTouched(
           Object.keys(errors).reduce((acc, key) => {
@@ -156,7 +171,9 @@ const EditZoneContent = () => {
           }, {}),
           true
         );
-        enqueueSnackbar('Please complete all required fields.', { variant: 'error' });
+        enqueueSnackbar("Please complete all required fields.", {
+          variant: "error",
+        });
         return;
       }
 
@@ -166,34 +183,40 @@ const EditZoneContent = () => {
       Object.entries(formik.values).forEach(([key, val]) => {
         data.append(key, val);
       });
-      data.append('_method', 'PUT');
+      data.append("_method", "PUT");
 
-      const token = JSON.parse(localStorage.getItem(
-        import.meta.env.VITE_APP_NAME + '-auth-v' + import.meta.env.VITE_APP_VERSION
-      ))?.access_token;
+      const token = JSON.parse(
+        localStorage.getItem(
+          import.meta.env.VITE_APP_NAME +
+            "-auth-v" +
+            import.meta.env.VITE_APP_VERSION
+        )
+      )?.access_token;
 
-      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/zone/${id}/update`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/zone/${id}/update`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      console.log('✅ Zone Updated:', response.data);
-      enqueueSnackbar('Zone updated successfully!', { variant: 'success' });
-      navigate('/Zones');
-
+      console.log("✅ Zone Updated:", response.data);
+      enqueueSnackbar("Zone updated successfully!", { variant: "success" });
+      navigate("/Zones");
     } catch (error) {
-      console.error('❌ Submission failed:', error);
+      console.error("❌ Submission failed:", error);
       const responseErrors = error?.response?.data?.errors || {};
       setErrors(responseErrors); // field-level fallback
 
       const errorMessage =
         error?.response?.data?.message ||
         Object.values(responseErrors)[0]?.[0] ||
-        'Something went wrong. Please try again.';
+        "Something went wrong. Please try again.";
 
-      enqueueSnackbar(errorMessage, { variant: 'error' });
-
+      enqueueSnackbar(errorMessage, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -202,17 +225,16 @@ const EditZoneContent = () => {
   return (
     <div>
       {initialLoading ? (
-      <div className="flex justify-center items-center min-h-[200px]">
-      <div className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent" />
-    </div>
-    ) : (
+        <div className="flex justify-center items-center min-h-[200px]">
+          <div className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent" />
+        </div>
+      ) : (
         <form className="w-full" onSubmit={formik.handleSubmit}>
           {/* Dashed Line Separator Between Steps */}
 
           {/* Stepper Body */}
           <div className="card-body p-1 ">
-            <div  className="grid grid-cols-1 xl:grid-cols-1 gap-4">
-
+            <div className="grid grid-cols-1 xl:grid-cols-1 gap-4">
               {/* Basic Information Card */}
               <div className="col-span-3 xl:col-span-2 card p-6">
                 <div className="grid grid-cols-2 gap-4">
@@ -223,31 +245,39 @@ const EditZoneContent = () => {
                     <CitySelect formik={formik} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="form-label mb-1">Zone Name (English)</label>
+                    <label className="form-label mb-1">
+                      Zone Name (English)
+                    </label>
                     <input
                       type="text"
                       className="input bg-transparent"
-                      {...formik.getFieldProps('zone_name_en')}
+                      {...formik.getFieldProps("zone_name_en")}
                     />
-                    {formik.touched.zone_name_en && formik.errors.zone_name_en && (
-                      <p className="text-red-500 text-xs mt-1">{formik.errors.zone_name_en}</p>
-                    )}
+                    {formik.touched.zone_name_en &&
+                      formik.errors.zone_name_en && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {formik.errors.zone_name_en}
+                        </p>
+                      )}
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <label className="form-label mb-1">Zone Name (Arabic)</label>
+                    <label className="form-label mb-1">
+                      Zone Name (Arabic)
+                    </label>
                     <input
                       type="text"
                       className="input bg-transparent"
-                      {...formik.getFieldProps('zone_name_ar') }
+                      {...formik.getFieldProps("zone_name_ar")}
                       dir="rtl"
                     />
-                    {formik.touched.zone_name_ar && formik.errors.zone_name_ar && (
-                      <p className="text-red-500 text-xs mt-1">{formik.errors.zone_name_ar}</p>
-                    )}
+                    {formik.touched.zone_name_ar &&
+                      formik.errors.zone_name_ar && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {formik.errors.zone_name_ar}
+                        </p>
+                      )}
                   </div>
-
-
                 </div>
               </div>
               {/* Business Information Card */}
@@ -257,14 +287,16 @@ const EditZoneContent = () => {
           <div className="card-footer py-8 flex justify-end">
             <button
               type="button"
-              className="btn btn-success"
+              className="btn btn-primary"
               disabled={loading}
               onClick={() => {
-                formik.validateForm().then(errors => {
+                formik.validateForm().then((errors) => {
                   if (Object.keys(errors).length === 0) {
                     handleSubmit(); // If valid
                   } else {
-                    enqueueSnackbar('Please complete all required fields.', { variant: 'error' });
+                    enqueueSnackbar("Please complete all required fields.", {
+                      variant: "error",
+                    });
 
                     // Touch all fields to show errors
                     Object.keys(errors).forEach((key) => {
@@ -274,7 +306,7 @@ const EditZoneContent = () => {
                 });
               }}
             >
-              {loading ? 'Saving...' : 'Submit'}
+              {loading ? "Saving..." : "Submit"}
             </button>
           </div>
         </form>
@@ -283,5 +315,4 @@ const EditZoneContent = () => {
   );
 };
 
-export  {EditZoneContent};
-
+export { EditZoneContent };

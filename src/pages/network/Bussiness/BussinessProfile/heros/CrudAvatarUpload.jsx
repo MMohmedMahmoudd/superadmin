@@ -1,11 +1,9 @@
+import { ImageInput } from "@/components/image-input";
+import { useState } from "react";
+import { KeenIcon } from "@/components";
+import { toAbsoluteUrl } from "@/utils";
 
-
-import { ImageInput } from '@/components/image-input';
-import { useState } from 'react';
-import { KeenIcon } from '@/components';
-import { toAbsoluteUrl } from '@/utils';
-
-const CrudAvatarUpload = ({ onFileChange, avatarURL}) => {
+const CrudAvatarUpload = ({ onFileChange, avatarURL }) => {
   const [avatar, setAvatar] = useState(
     avatarURL ? [{ dataURL: avatarURL }] : []
   );
@@ -22,9 +20,12 @@ const CrudAvatarUpload = ({ onFileChange, avatarURL}) => {
   return (
     <ImageInput value={avatar} onChange={handleAvatarChange}>
       {({ onImageUpload }) => (
-        <div className="image-input size-40" onClick={onImageUpload}>
+        <div
+          className="image-input size-40 cursor-pointer"
+          onClick={onImageUpload}
+        >
           <div
-            className="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-6 top-2 end-4 rounded-full"
+            className="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-6 top-2 end-4 rounded-full "
             onClick={(e) => {
               e.stopPropagation();
               setAvatar([]); // Clear the avatar
@@ -41,22 +42,22 @@ const CrudAvatarUpload = ({ onFileChange, avatarURL}) => {
           <div
             className="image-input-placeholder rounded-full border-3 border-success image-input-empty:border-gray-300 overflow-hidden w-48 h-48"
             style={{
-              backgroundImage: `url(${avatar.length > 0 ? avatar[0].dataURL : toAbsoluteUrl('/media/avatars/blank.png')})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundImage: `url(${avatar.length > 0 ? avatar[0].dataURL : toAbsoluteUrl("/media/avatars/blank.png")})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
-{avatar.length > 0 && (
-  <img
-    src={avatar[0].dataURL}
-    alt="avatar"
-    onError={(e) => {
-      e.target.onerror = null; // Prevent endless loop if default also fails
-      e.target.src = toAbsoluteUrl('/media/avatars/blank.png'); // Fallback to default
-    }}
-    className="w-full h-full object-cover"
-  />
-)}
+            {avatar.length > 0 && (
+              <img
+                src={avatar[0].dataURL}
+                alt="avatar"
+                onError={(e) => {
+                  e.target.onerror = null; // Prevent endless loop if default also fails
+                  e.target.src = toAbsoluteUrl("/media/avatars/blank.png"); // Fallback to default
+                }}
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
         </div>
       )}

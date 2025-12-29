@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { toAbsoluteUrl } from '@/utils/Assets';
-import { KeenIcon } from '@/components';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toAbsoluteUrl } from "@/utils/Assets";
+import { KeenIcon } from "@/components";
 
 const ProviderDocuments = ({ providerId }) => {
   const [documents, setDocuments] = useState([]);
@@ -11,7 +11,11 @@ const ProviderDocuments = ({ providerId }) => {
     try {
       setLoading(true);
       const token = JSON.parse(
-        localStorage.getItem(import.meta.env.VITE_APP_NAME + '-auth-v' + import.meta.env.VITE_APP_VERSION)
+        localStorage.getItem(
+          import.meta.env.VITE_APP_NAME +
+            "-auth-v" +
+            import.meta.env.VITE_APP_VERSION
+        )
       )?.access_token;
 
       const response = await axios.get(
@@ -25,18 +29,19 @@ const ProviderDocuments = ({ providerId }) => {
       const sp_add_date = response.data.data.sp_add_date;
 
       const parsedDocs = files.map((url) => {
-        const fileName = url.split('/').pop();
-        const extension = fileName?.split('.').pop()?.toLowerCase();
-        let image = '';
+        const fileName = url.split("/").pop();
+        const extension = fileName?.split(".").pop()?.toLowerCase();
+        let image = "";
 
-        if (['jpg', 'jpeg', 'png'].includes(extension)) {
+        if (["jpg", "jpeg", "png"].includes(extension)) {
           image = url;
         } else {
-          let icon = 'file.svg';
-          if (extension === 'pdf') icon = 'pdf.svg';
-          else if (extension === 'doc' || extension === 'docx') icon = 'doc.svg';
-          else if (extension === 'js') icon = 'js.svg';
-          else if (extension === 'ai') icon = 'ai.svg';
+          let icon = "file.svg";
+          if (extension === "pdf") icon = "pdf.svg";
+          else if (extension === "doc" || extension === "docx")
+            icon = "doc.svg";
+          else if (extension === "js") icon = "js.svg";
+          else if (extension === "ai") icon = "ai.svg";
 
           image = toAbsoluteUrl(`/media/file-types/${icon}`);
         }
@@ -51,7 +56,7 @@ const ProviderDocuments = ({ providerId }) => {
 
       setDocuments(parsedDocs);
     } catch (err) {
-      console.error('Failed to load documents', err);
+      console.error("Failed to load documents", err);
     } finally {
       setLoading(false);
     }
@@ -62,7 +67,7 @@ const ProviderDocuments = ({ providerId }) => {
   }, [providerId]);
 
   const handleDownload = (url) => {
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   const handleDelete = (url) => {
@@ -70,7 +75,7 @@ const ProviderDocuments = ({ providerId }) => {
   };
 
   return (
-    <div className="card p-6">
+    <div className="card p-6 mt-6">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold">Documents</h3>
         <div className="flex gap-2">
@@ -95,17 +100,27 @@ const ProviderDocuments = ({ providerId }) => {
               className="flex items-center justify-between border rounded p-4 shadow-sm "
             >
               <div className="flex items-center gap-3">
-                <img src={doc.image} alt="icon" className="w-10 h-10 object-cover rounded" />
+                <img
+                  src={doc.image}
+                  alt="icon"
+                  className="w-10 h-10 object-cover rounded"
+                />
                 <div>
                   <p className="font-medium text-sm">{doc.name}</p>
                   <p className="text-xs text-gray-500">{doc.date}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <button onClick={() => handleDownload(doc.url)} className="text-blue-600">
+                <button
+                  onClick={() => handleDownload(doc.url)}
+                  className="text-blue-600"
+                >
                   <KeenIcon icon="exit-down" />
                 </button>
-                <button onClick={() => handleDelete(doc.url)} className="text-red-600">
+                <button
+                  onClick={() => handleDelete(doc.url)}
+                  className="text-red-600"
+                >
                   <KeenIcon icon="trash" />
                 </button>
               </div>

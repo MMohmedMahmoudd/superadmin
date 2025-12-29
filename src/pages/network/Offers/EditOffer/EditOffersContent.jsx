@@ -1097,7 +1097,7 @@ const EditOffersContent = () => {
 <div className="card-footer py-8 flex justify-end">
 <button
   type="button"
-  className="btn btn-success"
+  className="btn btn-primary"
   disabled={loading}
   onClick={() => {
     formik.validateForm().then(errors => {
