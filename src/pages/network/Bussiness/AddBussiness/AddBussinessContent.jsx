@@ -16,6 +16,7 @@ import { BusinessTypeSelect } from "./BusinessTypeSelect";
 import { CitySelect } from "./CitySelect";
 import { customSelectStyles, ZoneSelect } from "./ZoneSelect";
 import Select from "react-select";
+import Svgify from "@sumcode/svgify";
 
 const AddBussinessContent = () => {
   const [searchParams] = useSearchParams();
@@ -164,7 +165,7 @@ const AddBussinessContent = () => {
       <div className="card-body p-1 ">
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
           <div className="parent-cruds xl:col-span-1  col-span-3 card p-6">
-            <div className=" flex justify-center items-center dark:bg-gray-200 bg-gray-100 rounded-lg py-4 flex-col gap-y-4 mb-4">
+            {/* <div className=" flex justify-center items-center dark:bg-gray-200 bg-gray-100 rounded-lg py-4 flex-col gap-y-4 mb-4">
               <label className="block text-sm font-medium mb-1">
                 Provider Logo{" "}
               </label>
@@ -176,7 +177,49 @@ const AddBussinessContent = () => {
               <p className="text-sm text-center text-gray-500 mt-1">
                 Only *.png, *.jpg, and *.jpeg image files are accepted.
               </p>
+            </div> */}
+
+            <div>
+              <label
+                className={[
+                  "aspect-[16/9] max-h-60 w-full border-dashed border-2 border-gray-300 rounded-lg flex flex-col justify-center items-center p-4 gap-2",
+                  "hover:border-primary hover:bg-[#FF6F1E11] cursor-pointer",
+                ]}
+              >
+                {formik.values?.sp_image ? (
+                  <img
+                    src={URL.createObjectURL(formik.values?.sp_image)}
+                    alt="provider logo"
+                  />
+                ) : (
+                  <>
+                    <input
+                      type="file"
+                      className="hidden"
+                      onChange={(e) => handleFileChange(e.target.files[0])}
+                      accept=".png, .jpg, .jpeg"
+                    />
+                    <Svgify
+                      IconName="image"
+                      FontWeight="stroke"
+                      Scale={2}
+                      className="text-[#FF6F1E]"
+                    />
+                    <p className="font-bold text-center">
+                      Click or Drag & Drop
+                    </p>
+                    <p className="text-gray-500 text-center">
+                      SVG,PNG, JPG (max. 800x400)
+                    </p>
+                  </>
+                )}
+              </label>
+
+              {errors.sp_image && (
+                <p className="text-red-500 text-sm mt-1">{errors.sp_image}</p>
+              )}
             </div>
+
             <div className=" card p-6 mt-5">
               <label className="form-label mb-1">Status</label>
               <Select
@@ -190,10 +233,6 @@ const AddBussinessContent = () => {
                     value: "0",
                     label: "Inactive",
                   },
-                  {
-                    value: "3",
-                    label: "Waiting Confirmation",
-                  },
                 ]}
                 value={
                   [
@@ -204,10 +243,6 @@ const AddBussinessContent = () => {
                     {
                       value: "0",
                       label: "Inactive",
-                    },
-                    {
-                      value: "3",
-                      label: "Waiting Confirmation",
                     },
                   ].find((opt) => opt.value == formik.values.sp_status) || null
                 }
@@ -472,7 +507,7 @@ const AddBussinessContent = () => {
                 )}
             </div>
 
-            <div className="col-span-2">
+            <div className="col-span-2 relative z-0">
               <label className="form-label mb-1">Pick Location on Map</label>
               <MapContainer
                 center={[28.5, 34.5]}

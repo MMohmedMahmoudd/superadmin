@@ -268,7 +268,7 @@ const BussinessDefaultContent = ({ provider }) => {
                       Business Description In English
                     </label>
                     <textarea
-                      className="textarea text-slate-100 text-inherit"
+                      className="textarea text-inherit"
                       value={descriptionEn}
                       onChange={(e) => setDescriptionEn(e.target.value)}
                     />
@@ -278,7 +278,7 @@ const BussinessDefaultContent = ({ provider }) => {
                       Business Description In Arabic
                     </label>
                     <textarea
-                      className="textarea text-slate-100 text-inherit"
+                      className="textarea text-inherit"
                       value={descriptionAr}
                       onChange={(e) => setDescriptionAr(e.target.value)}
                     />

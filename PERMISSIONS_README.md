@@ -81,19 +81,19 @@ const PERMISSION_MAPPING = {
   'Bussiness': 'providers',
   'all-Business': 'providers.list',
   'add-Bussiness': 'providers.add',
-  
+
   // Providers permissions
   'providers': 'stuff',
   'all-providers': 'stuff.list',
   'add-provider': 'stuff.add',
   'Provider-profile':'stuff.edit'
-  
-  
+
+
   // Users permissions
   'users': 'admins',
   'all-users': 'admins.list',
   'add-User': 'admins.add',
-  
+
   // And so on...
 };
 ```
@@ -103,32 +103,32 @@ const PERMISSION_MAPPING = {
 ### 1. Using the Permissions Hook
 
 ```javascript
-import { usePermissionsContext } from '@/providers/PermissionsProvider';
+import { usePermissionsContext } from "@/providers/PermissionsProvider";
 
 const MyComponent = () => {
-  const { 
-    permissions, 
-    canAccess, 
-    canList, 
-    canAdd, 
-    canEdit, 
-    canDelete, 
+  const {
+    permissions,
+    canAccess,
+    canList,
+    canAdd,
+    canEdit,
+    canDelete,
     canView,
-    isAuthenticated 
+    isAuthenticated,
   } = usePermissionsContext();
 
   // Check if user can access users menu
-  if (canAccess('users')) {
+  if (canAccess("users")) {
     // Show users menu
   }
 
   // Check if user can list users
-  if (canList('all-users')) {
+  if (canList("all-users")) {
     // Show users list
   }
 
   // Check if user can add users
-  if (canAdd('add-User')) {
+  if (canAdd("add-User")) {
     // Show add user button
   }
 };
@@ -137,27 +137,27 @@ const MyComponent = () => {
 ### 2. Using PermissionGuard Component
 
 ```javascript
-import { PermissionGuard } from '@/components';
+import { PermissionGuard } from "@/components";
 
 const MyPage = () => {
   return (
     <div>
       <h1>Users Management</h1>
-      
+
       {/* Only show if user can list users */}
       <PermissionGuard permissionKey="all-users" action="list">
         <UsersList />
       </PermissionGuard>
-      
+
       {/* Only show if user can add users */}
       <PermissionGuard permissionKey="add-User" action="add">
         <button>Add User</button>
       </PermissionGuard>
-      
+
       {/* Show fallback if user doesn't have permission */}
-      <PermissionGuard 
-        permissionKey="users" 
-        action="menu" 
+      <PermissionGuard
+        permissionKey="users"
+        action="menu"
         fallback={<p>You don't have access to users</p>}
       >
         <UsersSection />
@@ -170,14 +170,19 @@ const MyPage = () => {
 ### 3. Using withPermission HOC
 
 ```javascript
-import { withPermission } from '@/components';
+import { withPermission } from "@/components";
 
 const UsersPage = () => {
   return <div>Users Page Content</div>;
 };
 
 // Protect the entire page - redirect if no permission
-const ProtectedUsersPage = withPermission(UsersPage, 'users', 'menu', '/dashboard');
+const ProtectedUsersPage = withPermission(
+  UsersPage,
+  "users",
+  "menu",
+  "/dashboard"
+);
 
 export { ProtectedUsersPage as UsersPage };
 ```
@@ -185,18 +190,18 @@ export { ProtectedUsersPage as UsersPage };
 ### 4. Conditional Rendering in Components
 
 ```javascript
-import { usePermissionsContext } from '@/providers/PermissionsProvider';
+import { usePermissionsContext } from "@/providers/PermissionsProvider";
 
 const UserActions = ({ userId }) => {
   const { canEdit, canDelete } = usePermissionsContext();
 
   return (
     <div className="user-actions">
-      {canEdit('User-profile') && (
+      {canEdit("User-profile") && (
         <button onClick={() => editUser(userId)}>Edit</button>
       )}
-      
-      {canDelete('User-profile') && (
+
+      {canDelete("User-profile") && (
         <button onClick={() => deleteUser(userId)}>Delete</button>
       )}
     </div>
@@ -238,7 +243,7 @@ The menu is automatically filtered based on permissions. The system:
 
 ```javascript
 // In Demo1LightSidebarContent.jsx
-import { PermissionGuard } from '@/components';
+import { PermissionGuard } from "@/components";
 
 const Demo1LightSidebarContent = () => {
   return (
@@ -248,7 +253,7 @@ const Demo1LightSidebarContent = () => {
           <Users />
         </div>
       </PermissionGuard>
-      
+
       <PermissionGuard permissionKey="Teams" action="list">
         <div className="grid lg:grid-cols-2 gap-5 lg:gap-7.5 items-stretch">
           <div className="lg:col-span-2 h-full">
@@ -265,7 +270,7 @@ const Demo1LightSidebarContent = () => {
 
 ```javascript
 // In UsersPage.jsx
-import { PermissionGuard } from '@/components';
+import { PermissionGuard } from "@/components";
 
 const UsersPage = () => {
   return (
@@ -273,7 +278,7 @@ const UsersPage = () => {
       <Toolbar>
         <ToolbarActions>
           <PermissionGuard permissionKey="add-User" action="add">
-            <Link to="/adduser" className="btn btn-outline btn-primary">
+            <Link to="/" className="btn btn-outline btn-primary">
               Add User
             </Link>
           </PermissionGuard>
@@ -303,13 +308,14 @@ const UsersPage = () => {
 To debug permissions, you can use the PermissionsDemo component:
 
 ```javascript
-import { PermissionsDemo } from '@/pages/dashboards/demo1/light-sidebar/PermissionsDemo';
+import { PermissionsDemo } from "@/pages/dashboards/demo1/light-sidebar/PermissionsDemo";
 
 // Add this to any page to see current permissions
-<PermissionsDemo />
+<PermissionsDemo />;
 ```
 
 This will show:
+
 - Current authentication status
 - Raw permissions data
 - Permission check results
@@ -320,16 +326,18 @@ This will show:
 To add new permissions:
 
 1. **Update the permission mapping** in `usePermissions.js`:
+
 ```javascript
 const PERMISSION_MAPPING = {
   // Add your new permission
-  'new-feature': 'new_permission',
-  'new-feature-list': 'new_permission.list',
-  'new-feature-add': 'new_permission.add',
+  "new-feature": "new_permission",
+  "new-feature-list": "new_permission.list",
+  "new-feature-add": "new_permission.add",
 };
 ```
 
 2. **Update your menu configuration** in `menu.config.jsx`:
+
 ```javascript
 {
   title: 'New Feature',
@@ -352,10 +360,11 @@ const PERMISSION_MAPPING = {
 ```
 
 3. **Use PermissionGuard in your components**:
+
 ```javascript
 <PermissionGuard permissionKey="new-feature" action="menu">
   <NewFeatureComponent />
 </PermissionGuard>
 ```
 
-This permissions system provides a robust, flexible way to control access throughout your application based on user permissions from your API. 
+This permissions system provides a robust, flexible way to control access throughout your application based on user permissions from your API.

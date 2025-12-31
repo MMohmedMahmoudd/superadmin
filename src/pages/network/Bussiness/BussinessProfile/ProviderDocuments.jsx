@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toAbsoluteUrl } from "@/utils/Assets";
 import { KeenIcon } from "@/components";
+import { Modal } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 const ProviderDocuments = ({ providerId }) => {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const { enqueueSnackbar } = useSnackbar();
   const fetchDocuments = async () => {
     try {
       setLoading(true);
@@ -19,14 +21,13 @@ const ProviderDocuments = ({ providerId }) => {
       )?.access_token;
 
       const response = await axios.get(
-        `${import.meta.env.VITE_APP_API_URL}/provider/${providerId}/profile`,
+        `${import.meta.env.VITE_APP_API_URL}/providers/${providerId}/documents`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      const files = response.data.data.license_image || [];
-      const sp_add_date = response.data.data.sp_add_date;
+      const files = response.data.data || [];
 
       const parsedDocs = files.map((url) => {
         const fileName = url.split("/").pop();
@@ -49,10 +50,11 @@ const ProviderDocuments = ({ providerId }) => {
         return {
           image,
           name: fileName,
-          date: new Date(sp_add_date).toLocaleDateString(),
           url,
         };
       });
+
+      console.log("parsedDocs", parsedDocs);
 
       setDocuments(parsedDocs);
     } catch (err) {
@@ -70,8 +72,67 @@ const ProviderDocuments = ({ providerId }) => {
     window.open(url, "_blank");
   };
 
-  const handleDelete = (url) => {
-    setDocuments((prev) => prev.filter((doc) => doc.url !== url));
+  const handleDelete = async (idx) => {
+    const token = JSON.parse(
+      localStorage.getItem(
+        import.meta.env.VITE_APP_NAME +
+          "-auth-v" +
+          import.meta.env.VITE_APP_VERSION
+      )
+    )?.access_token;
+
+    setLoading(true);
+
+    const res = await axios.delete(
+      `${import.meta.env.VITE_APP_API_URL}/providers/${providerId}/delete-documents/${idx + 1}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setLoading(false);
+
+    if (res.status === 200) {
+      enqueueSnackbar("Document deleted successfully!", {
+        variant: "success",
+      });
+      setDocuments((prev) => prev.filter((_, index) => index !== idx));
+    } else {
+      enqueueSnackbar("Failed to delete document!", {
+        variant: "error",
+      });
+    }
+  };
+
+  const handleFileChange = async (file) => {
+    const data = new FormData();
+    data.append("documents[]", file);
+
+    const token = JSON.parse(
+      localStorage.getItem(
+        import.meta.env.VITE_APP_NAME +
+          "-auth-v" +
+          import.meta.env.VITE_APP_VERSION
+      )
+    )?.access_token;
+
+    await axios.postForm(
+      `${import.meta.env.VITE_APP_API_URL}/providers/${providerId}/update-documents`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    enqueueSnackbar("Document added successfully!", {
+      variant: "success",
+    });
+
+    fetchDocuments();
   };
 
   return (
@@ -79,12 +140,18 @@ const ProviderDocuments = ({ providerId }) => {
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold">Documents</h3>
         <div className="flex gap-2">
-          <button className="btn btn-outline btn-primary btn-sm">
+          {/* <button className="btn btn-outline btn-primary btn-sm">
             <KeenIcon icon="exit-down" className="mr-1" /> Download All
-          </button>
-          <button className="btn btn-outline btn-primary  btn-sm">
+          </button> */}
+          <label className="btn btn-outline btn-primary  btn-sm">
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => handleFileChange(e.target.files[0])}
+              accept=".jpg, .jpeg, .png"
+            />
             <KeenIcon icon="plus" className="mr-1" /> Add New
-          </button>
+          </label>
         </div>
       </div>
 
@@ -118,7 +185,7 @@ const ProviderDocuments = ({ providerId }) => {
                   <KeenIcon icon="exit-down" />
                 </button>
                 <button
-                  onClick={() => handleDelete(doc.url)}
+                  onClick={() => handleDelete(idx)}
                   className="text-red-600"
                 >
                   <KeenIcon icon="trash" />

@@ -256,7 +256,7 @@ const ProviderReviewsTable = ({ providerId }) => {
 
   return (
     <div className="card p-3 pt-0">
-      <div className="card-body p-0 overflow-x-auto relative">
+      <div className="card-body p-0 relative">
         <div className="card-header px-2 flex-wrap gap-2 justify-between">
           <h3 className="card-title ">Showing {totalCount} Reviews</h3>
           <div className="flex items-center gap-2 w-full md:w-auto">
@@ -282,37 +282,39 @@ const ProviderReviewsTable = ({ providerId }) => {
             <RateSelect value={rate} onChange={setRate} />
           </div>
         </div>
-        <DataGrid
-          key={refetchKey}
-          columns={columns}
-          serverSide
-          onFetchData={fetchReviews}
-          isLoading={loading}
-          layout={{
-            cellsBorder: true,
-            tableSpacing: "sm",
-          }}
-          pagination={{
-            page: pageIndex,
-            size: pageSize,
-            onPageChange: setPageIndex,
-            onPageSizeChange: setPageSize,
-          }}
-          messages={{
-            empty: "No reviews available",
-            loading: "Loading reviews...",
-          }}
-        />
-        {loading && (
-          <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px] flex items-center justify-center">
-            <div className="flex items-center gap-2 px-4 py-2 dark:bg-black/50 bg-white/90 rounded-lg shadow-lg">
-              <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-              <span className="text-sm font-medium text-gray-700">
-                Loading reviews...
-              </span>
+        <div className="overflow-x-auto">
+          <DataGrid
+            key={refetchKey}
+            columns={columns}
+            serverSide
+            onFetchData={fetchReviews}
+            isLoading={loading}
+            layout={{
+              cellsBorder: true,
+              tableSpacing: "sm",
+            }}
+            pagination={{
+              page: pageIndex,
+              size: pageSize,
+              onPageChange: setPageIndex,
+              onPageSizeChange: setPageSize,
+            }}
+            messages={{
+              empty: "No reviews available",
+              loading: "Loading reviews...",
+            }}
+          />
+          {loading && (
+            <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px] flex items-center justify-center">
+              <div className="flex items-center gap-2 px-4 py-2 dark:bg-black/50 bg-white/90 rounded-lg shadow-lg">
+                <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                <span className="text-sm font-medium text-gray-700">
+                  Loading reviews...
+                </span>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
         {modalOpen && selectedReview && (
           <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
             <div className="bg-white dark:bg-gray-100 w-full max-w-md rounded-lg p-6 shadow-lg relative">

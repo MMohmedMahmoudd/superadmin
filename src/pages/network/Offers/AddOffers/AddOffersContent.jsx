@@ -18,6 +18,9 @@ import RichTextEditor from "@/components/RichTextEditor";
 import { AmenitiesSidebar } from "./AmenitiesSidebar";
 import { KeenIcon } from "@/components/keenicons";
 import YesNoSelect from "@/components/YesNoSelect";
+import Select from "react-select";
+import { customSelectStyles } from "../../Bussiness/AddBussiness/ZoneSelect";
+
 const AddOffersContent = () => {
   const [activeTab, setActiveTab] = useState("English");
   const [loading, setLoading] = useState(false);
@@ -445,21 +448,53 @@ const AddOffersContent = () => {
                 <label className="form-label mb-1">Business Name</label>
                 <BusinessSelect formik={formik} />
               </div>
-              <div className="col-span-1">
+              <div>
                 <label className="form-label mb-1">Status</label>
-                <select
-                  className="select"
-                  {...formik.getFieldProps("offer_status")}
-                >
-                  <option value="">Select Status</option>
-                  <option value="1">Active</option>
-                  <option value="2">Pending</option>
-                  <option value="0">Inactive</option>
-                </select>
+                <Select
+                  classNamePrefix="react-select"
+                  options={[
+                    {
+                      value: "1",
+                      label: "Active",
+                    },
+                    {
+                      value: "2",
+                      label: "Pending",
+                    },
+                    {
+                      value: "0",
+                      label: "Inactive",
+                    },
+                  ]}
+                  value={
+                    [
+                      {
+                        value: "1",
+                        label: "Active",
+                      },
+                      {
+                        value: "2",
+                        label: "Pending",
+                      },
+                      {
+                        value: "0",
+                        label: "Inactive",
+                      },
+                    ].find((opt) => opt.value == formik.values.offer_status) ||
+                    null
+                  }
+                  onChange={(newValue) => {
+                    formik.setFieldValue(
+                      "offer_status",
+                      newValue ? newValue.value : ""
+                    );
+                  }}
+                  styles={customSelectStyles}
+                ></Select>
                 {formik.touched.offer_status && formik.errors.offer_status && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <span role="alert" className="text-danger text-xs mt-1">
                     {formik.errors.offer_status}
-                  </p>
+                  </span>
                 )}
               </div>
               <div>
@@ -547,9 +582,9 @@ const AddOffersContent = () => {
                       className="flex items-center gap-4 p-4 border rounded-lg bg-gray-200"
                     >
                       {/* Drag Handle */}
-                      <div className="cursor-move text-gray-400">
+                      {/* <div className="cursor-move text-gray-400">
                         <KeenIcon icon="menu" />
-                      </div>
+                      </div> */}
 
                       {/* Images Preview */}
                       <div className="relative">
@@ -698,7 +733,7 @@ const AddOffersContent = () => {
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleEditOfferOption(option)}
-                            className="btn btn-sm btn-outline btn-primary"
+                            className="btn btn-sm btn-outline"
                           >
                             <KeenIcon icon="notepad-edit" />
                           </button>
@@ -1031,7 +1066,7 @@ const AddOffersContent = () => {
       <AmenitiesSidebar
         open={amenitiesSidebarOpen}
         onClose={handleCloseSidebar}
-        spTypeUid={formik.values.businessData?.type?.id}
+        spTypeUid={formik.values.businessData?.type?.uid}
         onAmenitySelect={handleAmenitySelect}
         editingOption={editingOption}
       />

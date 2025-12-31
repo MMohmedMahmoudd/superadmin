@@ -2,410 +2,407 @@
 export const getMenuSidebar = (filterMenuByPermissions) => {
   const MENU_SIDEBAR = [
     {
-      title: 'Dashboards',
-      icon: 'element-11',
-      path: '/'
+      title: "Dashboards",
+      icon: "element-11",
+      path: "/",
     },
     {
-      title: 'Business',
-      icon: 'shop',
-      key: 'Bussiness',
-      path: '/bussiness',
+      title: "Business",
+      icon: "shop",
+      key: "Bussiness",
+      path: "/bussiness",
       children: [
         {
-          title: 'All Business',
-          key: 'all-Business',
-          path: '/bussiness',
+          title: "All Business",
+          key: "all-Business",
+          path: "/bussiness",
         },
         {
-          title: 'Add Business',
-          key: 'add-Bussiness',
-          path: '/addbussiness',
+          title: "Add Business",
+          key: "add-Bussiness",
+          path: "/addbussiness",
         },
         {
-          title: 'Bussiness Profile',
-          key: 'Bussiness-Profile',
-          path: '/businessprofile/:id',
-          disabled: true
+          title: "Bussiness Profile",
+          key: "Bussiness-Profile",
+          path: "/businessprofile/:id",
+          disabled: true,
         },
-      ]
+      ],
     },
     {
-      title: 'Providers',
-      key: 'providers',
-      icon: 'users',
-      path: '/providers',
+      title: "Providers",
+      key: "providers",
+      icon: "users",
+      path: "/providers",
       children: [
         {
-          title: 'All Providers',
-          key: 'all-providers',
-          path: '/providers',
+          title: "All Providers",
+          key: "all-providers",
+          path: "/providers",
         },
         {
-          title: 'Add Provider',
-          key: 'add-provider',
-          path: '/addprovider',
+          title: "Add Provider",
+          key: "add-provider",
+          path: "/addprovider",
         },
         {
-          title: 'Provider Profile',
-          key: 'Provider-profile',
-          path: '/ProviderProfile/:id',
-          disabled: true
-        }
-      ]
+          title: "Provider Profile",
+          key: "Provider-profile",
+          path: "/ProviderProfile/:id",
+          disabled: true,
+        },
+      ],
     },
     {
-      title: 'Users',
-      key: 'users',
-      icon: 'user',
-      path: '/Users',
+      title: "Users",
+      key: "users",
+      icon: "user",
+      path: "/Users",
       children: [
         {
-          title: 'All Users',
-          key: 'all-users',
-          path: '/Users',
+          title: "All Users",
+          key: "all-users",
+          path: "/Users",
         },
         {
-          title: 'Add User',
-          key: 'add-User',
-          path: '/AddUser',
+          title: "Add User",
+          key: "add-User",
+          path: "/AddUser",
         },
         {
-          title: 'User Profile',
-          key: 'User-profile',
-          path: '/UserProfile/:id',
-          disabled: true
-        }
-      ]
+          title: "User Profile",
+          key: "User-profile",
+          path: "/UserProfile/:id",
+          disabled: true,
+        },
+      ],
     },
     {
-      title: 'Offers',
-      key: 'offers',
-      icon: 'discount',
-      path: '/Offers',
+      title: "Offers",
+      key: "offers",
+      icon: "discount",
+      path: "/Offers",
       children: [
         {
-          title: 'All Offers',
-          key: 'all-Offers',
-          path: '/Offers',
+          title: "All Offers",
+          key: "all-Offers",
+          path: "/Offers",
         },
         {
-          title: 'Add Offer',
-          key: 'add-Offer',
-          path: '/AddOffer',
+          title: "Add Offer",
+          key: "add-Offer",
+          path: "/addOffer",
         },
         {
-          title: 'Offer Profile',
-          key: 'Offer-Profile',
-          path: '/OfferProfile/:id',
-          disabled: true
+          title: "Offer Profile",
+          key: "Offer-Profile",
+          path: "/OfferProfile/:id",
+          disabled: true,
         },
         {
-          title: 'Edit Offer',
-          key: 'EditOffer',
-          path: '/EditOffer/:id',
-          disabled: true
+          title: "Edit Offer",
+          key: "EditOffer",
+          path: "/EditOffer/:id",
+          disabled: true,
         },
-      ]
+      ],
     },
     {
-      title: 'Locations',
-      key: 'locations',
-      icon: 'geolocation',
+      title: "Locations",
+      key: "locations",
+      icon: "geolocation",
       children: [
         {
-          title: 'Countries',
-          key: 'Countries',
-          path: '/Countries',
+          title: "Countries",
+          key: "Countries",
+          path: "/Countries",
         },
         {
-          title: 'Cities',
-          key: 'Cities',
-          path: '/Cities',
+          title: "Cities",
+          key: "Cities",
+          path: "/Cities",
           children: [
             {
-              title: 'All Cities',
-              key: 'all-Cities',
-              path: '/Cities',
+              title: "All Cities",
+              key: "all-Cities",
+              path: "/Cities",
             },
             {
-              title: 'Add City',
-              key: 'add-City',
-              path: '/addCity',
+              title: "Add City",
+              key: "add-City",
+              path: "/addCity",
             },
             {
-              title: 'EditCity',
-              key: 'Edit-City',
-              path: '/EditCity/:id',
-              disabled: true
-            }
-          ]
+              title: "EditCity",
+              key: "Edit-City",
+              path: "/EditCity/:id",
+              disabled: true,
+            },
+          ],
         },
         {
-          title: 'Zones',
-          key: 'Zones',
-          path: '/Zones',
+          title: "Zones",
+          key: "Zones",
+          path: "/Zones",
           children: [
             {
-              title: 'All Zones',
-              key: 'all-Zones',
-              path: '/Zones',
+              title: "All Zones",
+              key: "all-Zones",
+              path: "/Zones",
             },
             {
-              title: 'Add Zone',
-              key: 'add-Zone',
-              path: '/addzone',
+              title: "Add Zone",
+              key: "add-Zone",
+              path: "/addzone",
             },
             {
-              title: 'Edit Zone',
-              key: 'Edit-Zone',
-              path: '/editzone/:id',
-              disabled: true
-            }	
-          ]
-        }
-      ]
+              title: "Edit Zone",
+              key: "Edit-Zone",
+              path: "/editzone/:id",
+              disabled: true,
+            },
+          ],
+        },
+      ],
     },
     {
-      title: 'Reservations',
-      key: 'reservations',
-      icon: 'cheque',
-      path: '/reservations',
+      title: "Reservations",
+      key: "reservations",
+      icon: "cheque",
+      path: "/reservations",
       children: [
         {
-          title: 'All Reservations',
-          key: 'all-reservations',
-          path: '/reservations',
+          title: "All Reservations",
+          key: "all-reservations",
+          path: "/reservations",
         },
         {
-          title: 'Add Reservation',
-          key: 'add-reservation',
-          path: '/addreservation',
+          title: "Add Reservation",
+          key: "add-reservation",
+          path: "/addreservation",
         },
         {
-          title: 'Reservation Profile',
-          key: 'reservation-profile',
-          path: '/reservationprofile/:id',
-          disabled: true
+          title: "Reservation Profile",
+          key: "reservation-profile",
+          path: "/reservationprofile/:id",
+          disabled: true,
         },
-      ]
+      ],
     },
     {
-      title: 'Teams',
-      icon: 'user-tick',
-      key: 'Teams',
-      path: '/Teams',
+      title: "Teams",
+      icon: "user-tick",
+      key: "Teams",
+      path: "/Teams",
       children: [
         {
-          title: 'All Member',
-          key: 'All-Profile',
-          path: '/Teams'
+          title: "All Member",
+          key: "All-Profile",
+          path: "/Teams",
         },
         {
-          title: 'Add Member',
-          key: 'Add-member',
-          path: '/AddMember'
+          title: "Add Member",
+          key: "Add-member",
+          path: "/AddMember",
         },
         {
-          title: 'Member Profile',
-          key: 'MemberProfile',
-          path: '/MemberProfile/:id',
-          disabled: true
+          title: "Member Profile",
+          key: "MemberProfile",
+          path: "/MemberProfile/:id",
+          disabled: true,
         },
         {
-          title: 'Roles',
-          key: 'Roles',
-          path: '/Roles',
-          disabled: true
+          title: "Roles",
+          key: "Roles",
+          path: "/Roles",
+          disabled: true,
         },
         {
-          title: 'Add Role',
-          key: 'Add-Role',
-          path: '/AddRole',
-          disabled: true
+          title: "Add Role",
+          key: "Add-Role",
+          path: "/AddRole",
+          disabled: true,
         },
         {
-          title: 'Role Profile',
-          key: 'Role-Profile',
-          path: '/RoleProfile/:id',
-          disabled: true
-        }
-      ]
+          title: "Role Profile",
+          key: "Role-Profile",
+          path: "/RoleProfile/:id",
+          disabled: true,
+        },
+      ],
     },
     {
-      heading: 'Settings'
+      heading: "Settings",
     },
     {
-      title: 'Settings',
-      key: 'Settings',
-      icon: 'setting-2',
+      title: "Settings",
+      key: "Settings",
+      icon: "setting-2",
       children: [
         {
-          title: 'Bundles',
-          key: 'Bundles',
-          path: '/Bundles',
+          title: "Bundles",
+          key: "Bundles",
+          path: "/Bundles",
           children: [
             {
-              title: 'All Bundles',
-              key: 'All-Bundles',
-              path: '/Bundles',
+              title: "All Bundles",
+              key: "All-Bundles",
+              path: "/Bundles",
             },
             {
-              title: 'Add Bundles',
-              key: 'AddBundles',
-              path: '/AddBundles',
+              title: "Add Bundles",
+              key: "AddBundles",
+              path: "/AddBundles",
             },
             {
-              title: 'Edit Bundle',
-              key: 'Edit-Bundle',
-              path: '/editbundle/:id',
-              disabled: true
-            }
-          ]
+              title: "Edit Bundle",
+              key: "Edit-Bundle",
+              path: "/editbundle/:id",
+              disabled: true,
+            },
+          ],
         },
         {
-          title: 'Main Categories',
-          key: 'main-categories',
-          path: '/maincategories',
+          title: "Main Categories",
+          key: "main-categories",
+          path: "/maincategories",
           children: [
             {
-              title: 'All Main Categories',
-              key: 'All-Categories',
-              path: '/maincategories',
+              title: "All Main Categories",
+              key: "All-Categories",
+              path: "/maincategories",
             },
             {
-              title: 'Add Category',
-              key: 'Add-Category',
-              path: '/AddCategory',
+              title: "Add Category",
+              key: "Add-Category",
+              path: "/AddCategory",
             },
             {
-              title: 'Edit Category',
-              key: 'Edit-Category',
-              path: '/editcategory/:id',
-              disabled:true
-            }
-          ]
+              title: "Edit Category",
+              key: "Edit-Category",
+              path: "/editcategory/:id",
+              disabled: true,
+            },
+          ],
         },
         {
-          title:'Sub Category',
-          key:'Sub-category',
-          path:'/subcategory',
-          children:[
+          title: "Sub Category",
+          key: "Sub-category",
+          path: "/subcategory",
+          children: [
             {
-              title:'All Sub Category',
-              key:'Sub-category',
-              path:'/subcategory',
-      
+              title: "All Sub Category",
+              key: "Sub-category",
+              path: "/subcategory",
             },
             {
-              title:'Add Sub Category',
-              key:'Add-Sub-category',
-              path:'/addsubcategory',
+              title: "Add Sub Category",
+              key: "Add-Sub-category",
+              path: "/addsubcategory",
             },
             {
-              title:'Edit Sub Category',
-              key:'Edit-Sub-category',
-              path:'/editsubcategory/:id',
-              disabled:true
-            }    
-          ]
+              title: "Edit Sub Category",
+              key: "Edit-Sub-category",
+              path: "/editsubcategory/:id",
+              disabled: true,
+            },
+          ],
         },
         {
-          title:'Payment Method',
-          key:'Payment-Method',
-          path:'/paymentmethod',
-          children:[
+          title: "Payment Method",
+          key: "Payment-Method",
+          path: "/paymentmethod",
+          children: [
             {
-              title:'All Payment Method',
-              key:'allPayment-Method',
-              path:'/paymentmethod',
+              title: "All Payment Method",
+              key: "allPayment-Method",
+              path: "/paymentmethod",
             },
             {
-              title:'Add Payment Method',
-              key:'add-Payment-Method',
-              path:'/addpaymentmethod',
-      
+              title: "Add Payment Method",
+              key: "add-Payment-Method",
+              path: "/addpaymentmethod",
             },
             {
-              title:'Edit Payment Method',
-              key:'Edit-Payment-Method',
-              path:'/editpaymentmethod/:id',
-              disabled:true
-            }
-          ]
+              title: "Edit Payment Method",
+              key: "Edit-Payment-Method",
+              path: "/editpaymentmethod/:id",
+              disabled: true,
+            },
+          ],
         },
         {
-          title:'Currencies',
-          key:'Currencies',
-          path:'/currencies',
-          children:[
+          title: "Currencies",
+          key: "Currencies",
+          path: "/currencies",
+          children: [
             {
-              title:'All Currencies',
-              key:'All-Currencies',
-              path:'/currencies',
+              title: "All Currencies",
+              key: "All-Currencies",
+              path: "/currencies",
             },
             {
-              title:'Add Currency',
-              key:'Add-Currency',
-              path:'/addcurrency',
+              title: "Add Currency",
+              key: "Add-Currency",
+              path: "/addcurrency",
             },
             {
-              title:'Edit Currency',
-              key:'Edit-Currency',
-              path:'/editcurrency/:id',
-              disabled:true
-            }
-          ]
+              title: "Edit Currency",
+              key: "Edit-Currency",
+              path: "/editcurrency/:id",
+              disabled: true,
+            },
+          ],
         },
         {
-          title:'Promocodes',
-          key:'Promocodes',
-          path:'/promocodes',
-          children:[
+          title: "Promocodes",
+          key: "Promocodes",
+          path: "/promocodes",
+          children: [
             {
-              title:'All Promocodes',
-              key:'All-Promocodes',
-              path:'/promocodes',
+              title: "All Promocodes",
+              key: "All-Promocodes",
+              path: "/promocodes",
             },
             {
-              title:'Add Promocode',
-              key:'Add-Promocode',
-              path:'/addpromocode',
-              
+              title: "Add Promocode",
+              key: "Add-Promocode",
+              path: "/addpromocode",
             },
             {
-              title:'Edit Promocode',
-              key:'Edit-Promocode',
-              path:'/editpromocode/:id',
-              disabled:true
-            }
-          ]
+              title: "Edit Promocode",
+              key: "Edit-Promocode",
+              path: "/editpromocode/:id",
+              disabled: true,
+            },
+          ],
         },
         {
-          title:'Amenities',
-          key:'Amenities',
-          path:'/amenities',
-          children:[
+          title: "Amenities",
+          key: "Amenities",
+          path: "/amenities",
+          children: [
             {
-              title:'All Amenities',
-              key:'All-Amenities',
-              path:'/amenities',
+              title: "All Amenities",
+              key: "All-Amenities",
+              path: "/amenities",
             },
             {
-              title:'Add Amenity',
-              key:'Add-Amenity',
-              path:'/AddAmenity',
+              title: "Add Amenity",
+              key: "Add-Amenity",
+              path: "/AddAmenity",
             },
             {
-              title:'Edit Amenity',
-              key:'Edit-Amenity',
-              path:'/editamenity/:id',
-              disabled:true
-            }
-          ]
-        }
-      ]
-    }
+              title: "Edit Amenity",
+              key: "Edit-Amenity",
+              path: "/editamenity/:id",
+              disabled: true,
+            },
+          ],
+        },
+      ],
+    },
   ];
 
   // If filterMenuByPermissions is provided, filter the menu
