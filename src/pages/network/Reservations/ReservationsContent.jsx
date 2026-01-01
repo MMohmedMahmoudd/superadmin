@@ -157,7 +157,7 @@ const ReservationsContent = () => {
           <span
             className={`badge badge-outline ${row.original.status_name === "COMPLETED" ? "badge-success" : row.original.status_name === "ACTIVE" ? "badge-success" : row.original.status_name === "CANCELED" ? "badge-danger" : row.original.status_name === "WAITING PAYMENT" ? "badge-primary" : row.original.status_name === "WAITING CONFIRMATION" ? "badge-warning" : row.original.status_name === "WAITING CONFIRMATION FROM CUSTOMER" ? "badge-warning" : row.original.status_name === "NEW ARRIVAL DATE AWAITS YOUR APPROVAL" ? "badge-warning" : ""} `}
           >
-            ● {row.original.status_name}
+            {row.original.status_name}
           </span>
         ),
         meta: { className: "min-w-[200px]" },

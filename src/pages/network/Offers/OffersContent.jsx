@@ -188,7 +188,7 @@ const OffersContent = () => {
                 : "warning";
           return (
             <span className={`badge badge-${color} badge-outline capitalize`}>
-              ● {status}
+              {status}
             </span>
           );
         },

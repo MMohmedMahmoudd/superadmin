@@ -1066,7 +1066,7 @@ const AddOffersContent = () => {
       <AmenitiesSidebar
         open={amenitiesSidebarOpen}
         onClose={handleCloseSidebar}
-        spTypeUid={formik.values.businessData?.type?.uid}
+        spTypeUid={formik.values.businessData?.type?.id}
         onAmenitySelect={handleAmenitySelect}
         editingOption={editingOption}
       />

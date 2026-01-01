@@ -183,7 +183,7 @@ const ProviderReviewsTable = ({ providerId }) => {
             <span
               className={`badge badge-${isActive ? "success" : "danger"} badge-outline capitalize`}
             >
-              ● {isActive ? "Active" : "Inactive"}
+              {isActive ? "Active" : "Inactive"}
             </span>
           );
         },

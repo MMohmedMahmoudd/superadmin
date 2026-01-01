@@ -1,36 +1,36 @@
-import { useMemo, useEffect, useState } from 'react';
-import Select from 'react-select';
-import PropTypes from 'prop-types';
-import { customStyles } from '../../Bussiness/AddBussiness/PersonNameSelect';
-import axios from 'axios';
+import { useMemo, useEffect, useState } from "react";
+import Select from "react-select";
+import PropTypes from "prop-types";
+import { customStyles } from "../../Bussiness/AddBussiness/PersonNameSelect";
+import axios from "axios";
 
 const customMultiValueStyles = {
   multiValue: (base) => ({
     ...base,
-    backgroundColor: '#f0f0f0',
-    borderRadius: '9999px',
-    padding: '2px 6px',
-    display: 'flex',
-    alignItems: 'center',
-    fontSize: '12px',
-    color: '#333',
+    backgroundColor: "#f0f0f0",
+    borderRadius: "9999px",
+    padding: "2px 6px",
+    display: "flex",
+    alignItems: "center",
+    fontSize: "12px",
+    color: "#333",
   }),
   multiValueLabel: (base) => ({
     ...base,
-    color: '#333',
-    fontWeight: '500',
-    padding: '0 4px',
+    color: "#333",
+    fontWeight: "500",
+    padding: "0 4px",
   }),
   multiValueRemove: (base) => ({
     ...base,
-    color: '#666',
-    borderRadius: '50%',
-    ':hover': {
-      backgroundColor: '#F44336',
-      color: '#fff',
-      width: '20px',
-      height: '20px',
-      cursor:'pointer'
+    color: "#666",
+    borderRadius: "50%",
+    ":hover": {
+      backgroundColor: "#F44336",
+      color: "#fff",
+      width: "20px",
+      height: "20px",
+      cursor: "pointer",
     },
   }),
 };
@@ -44,29 +44,33 @@ const BranchesSelect = ({ formik }) => {
       const providerId = formik.values.sp_uid;
       if (!providerId) {
         setProviderBranches([]);
-        formik.setFieldValue('branch_uid', '');
+        formik.setFieldValue("branch_uid", "");
         return;
       }
-      
+
       try {
         setLoading(true);
-        const token = JSON.parse(localStorage.getItem(
-          import.meta.env.VITE_APP_NAME + '-auth-v' + import.meta.env.VITE_APP_VERSION
-        ))?.access_token;
+        const token = JSON.parse(
+          localStorage.getItem(
+            import.meta.env.VITE_APP_NAME +
+              "-auth-v" +
+              import.meta.env.VITE_APP_VERSION
+          )
+        )?.access_token;
 
         const response = await axios.get(
           `${import.meta.env.VITE_APP_API_URL}/provider/${providerId}/profile`,
           {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
 
         const branches = response.data.data.branches || [];
         setProviderBranches(branches);
       } catch (error) {
-        console.error('Error fetching provider branches:', error);
+        console.error("Error fetching provider branches:", error);
         setProviderBranches([]);
-        formik.setFieldValue('branch_uid', '');
+        formik.setFieldValue("branch_uid", "");
       } finally {
         setLoading(false);
       }
@@ -76,22 +80,22 @@ const BranchesSelect = ({ formik }) => {
   }, [formik.values.sp_uid]);
 
   const branchOptions = useMemo(() => {
-    const options = providerBranches.map(branch => {
+    const options = providerBranches.map((branch) => {
       let label = branch.name?.trim();
       if (!label) {
-        label = branch.address?.trim() || branch.phone || 'Unnamed Branch';
+        label = branch.address?.trim() || branch.phone || "Unnamed Branch";
       }
 
       return {
         value: branch.id,
         label,
-        fullData: branch
+        fullData: branch,
       };
     });
 
     return options;
   }, [providerBranches]);
-  
+
   return (
     <Select
       className="react-select"
@@ -102,13 +106,18 @@ const BranchesSelect = ({ formik }) => {
       closeMenuOnSelect={true}
       isLoading={loading}
       onBlur={() => {
-        formik.setFieldTouched('branch_uid', true);
+        formik.setFieldTouched("branch_uid", true);
       }}
-      value={branchOptions.find(opt => opt.value === formik.values.branch_uid) || null}
+      value={
+        branchOptions.find((opt) => opt.value === formik.values.branch_uid) ||
+        null
+      }
       onChange={(selectedOption) => {
-        formik.setFieldValue('branch_uid', selectedOption ? selectedOption.value : '');
+        formik.setFieldValue(
+          "branch_uid",
+          selectedOption ? selectedOption.value : ""
+        );
       }}
-      isClearable
       getOptionLabel={(option) => option.label}
       getOptionValue={(option) => option.value}
       styles={{ ...customStyles, ...customMultiValueStyles }}
@@ -121,4 +130,4 @@ BranchesSelect.propTypes = {
   formik: PropTypes.object.isRequired,
 };
 
-export { BranchesSelect }; 
+export { BranchesSelect };

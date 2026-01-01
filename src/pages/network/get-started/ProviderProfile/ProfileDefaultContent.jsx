@@ -367,7 +367,7 @@ const ProfileDefaultContentComponent = (
                                   capitalize: true,
                                 })}
                               >
-                                ● {business.status}
+                                {business.status}
                               </span>
                             </div>
                           </div>

@@ -175,7 +175,7 @@ const ReservationTap = ({ providerId }) => {
           <span
             className={`badge badge-${row.original.status_name === "Waiting Payment" ? "warning" : row.original.status_name === "confirmed" ? "success" : row.original.status_name === "cancelled" ? "danger" : row.original.status_name === "expired" ? "danger" : row.original.status_name === "completed" ? "success" : "danger"} badge-outline capitalize`}
           >
-            ● {row.original.status_name}
+            {row.original.status_name}
           </span>
         ),
         meta: { className: "min-w-[120px]" },

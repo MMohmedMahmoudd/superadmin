@@ -505,7 +505,7 @@ const MemberProfileContent = forwardRef(
                                     capitalize: true,
                                   })}
                                 >
-                                  ● {business.status}
+                                  {business.status}
                                 </span>
                               </div>
                             </div>

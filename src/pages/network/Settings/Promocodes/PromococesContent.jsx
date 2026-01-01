@@ -115,7 +115,7 @@ const PromococesContent = () => {
                 status === "Active" ? "badge-success " : "badge-danger "
               }`}
             >
-              ● {status}
+              {status}
             </span>
           );
         },

@@ -214,7 +214,7 @@ const ReservationTap = ({ offerId }) => {
             <span
               className={`badge badge-${badgeColor} badge-outline capitalize`}
             >
-              ● {statusName}
+              {statusName}
             </span>
           );
         },

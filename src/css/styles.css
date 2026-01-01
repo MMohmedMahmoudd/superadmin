@@ -9,7 +9,7 @@
   --color-bg: #ffffff;
   --color-text: #374151;
   --color-border: #d1d5db;
-  --color-border-focus: #3b82f6;
+  --color-border-focus: #5c5e9b;
   --color-bg-hover: #f3f4f6;
   --color-bg-active: #e5e7eb;
   --color-shadow: 0 1px 2px 0 rgba(116, 70, 70, 0.05);
@@ -450,8 +450,8 @@ table th {
   text-transform: capitalize;
 }
 
-.btn-primary {
-  background: linear-gradient(338deg, #7cfaf7, #5c5e9b);
+/* .btn-primary {
+  background: #5c5e9b;
   color: #fff !important;
   outline: none;
   border: none;
@@ -463,7 +463,7 @@ table th {
   &:hover {
     color: #fff !important;
   }
-}
+} */
 
 .react-select,
 .react-select__control {
@@ -477,9 +477,7 @@ table th {
 
 .text-primary,
 .menu-item.active > .menu-link .menu-item-active\:text-primary {
-  background: linear-gradient(45deg, #7cfaf7, #5c5e9b);
-  background-clip: text;
-  color: transparent !important;
+  color: #5c5e9b !important;
 }
 
 .MuiFormControl-root,

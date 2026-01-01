@@ -150,7 +150,6 @@ const BusinessSelect = ({ formik }) => {
             {e.label}
           </div>
         )}
-        isClearable
         noOptionsMessage={() => {
           if (loading) return "Loading...";
           return "No businesses available";

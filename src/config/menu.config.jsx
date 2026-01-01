@@ -408,6 +408,7 @@ export const getMenuSidebar = (filterMenuByPermissions) => {
   // If filterMenuByPermissions is provided, filter the menu
   if (filterMenuByPermissions) {
     const filteredMenu = filterMenuByPermissions(MENU_SIDEBAR);
+    console.log("filteredMenu", filteredMenu);
     return filteredMenu;
   }
 

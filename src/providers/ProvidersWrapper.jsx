@@ -29,9 +29,7 @@ const ProvidersWrapper = ({ children }) => {
                 <HelmetProvider>
                   <LayoutProvider>
                     <LoadersProvider>
-                      <PermissionsProvider>
-                        <MenusProvider>{children}</MenusProvider>
-                      </PermissionsProvider>
+                      <PermissionsProvider>{children}</PermissionsProvider>
                     </LoadersProvider>
                   </LayoutProvider>
                 </HelmetProvider>

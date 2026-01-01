@@ -148,7 +148,7 @@ const ProviderBranchesTable = ({ providerId }) => {
           <span
             className={`badge badge-${row.original.status === 1 ? "success" : "danger"} badge-outline capitalize`}
           >
-            ● {row.original.status === 1 ? "Active" : "Inactive"}
+            {row.original.status === 1 ? "Active" : "Inactive"}
           </span>
         ),
         meta: { className: "min-w-[100px]" },

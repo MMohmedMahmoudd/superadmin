@@ -75,7 +75,7 @@ const OfferBranchesTap = ({ provider }) => {
           <span
             className={`badge badge-${row.original.status === 1 ? "success" : "secondary"} badge-outline capitalize`}
           >
-            ● {row.original.main_branch}
+            {row.original.main_branch}
           </span>
         ),
         enableSorting: true,
