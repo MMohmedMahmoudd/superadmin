@@ -401,7 +401,7 @@ const AddBussinessContent = () => {
               )}
             </div>
             <div>
-              <label className="form-label "> Phone Number</label>
+              <label className="form-label mb-1"> Phone Number</label>
               <MuiPhoneInput
                 value={phoneInputValue}
                 onChange={(value, info) => {

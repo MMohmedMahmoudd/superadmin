@@ -117,7 +117,8 @@ html,
 
 @media (prefers-color-scheme: dark) {
   .dark {
-    --primary: #1a1a1a; /* Dark mode background */
+    --tw-primary: #ffff;
+    --primary: #ffff; /* Dark mode background */
     --primary-hover: #2a2a2a; /* Dark mode hover background */
     --hover-border: #444444; /* Dark mode hover border */
     --border: #333333; /* Dark mode default border */
@@ -134,8 +135,8 @@ html,
   }
 }
 .dark {
-  --primary: #1a1a1a; /* Dark mode primary background */
-  --primary-hover: #333333; /* Dark mode primary hover */
+  --primary: #fff; /* Dark mode primary background */
+  --primary-hover: #fff; /* Dark mode primary hover */
   --hover-border: #555555; /* Dark mode hover border */
   --border: #444444; /* Dark mode default border */
   --text: #ffffff; /* Dark mode text color */
@@ -237,7 +238,7 @@ html,
   border-color: #5c5e9b;
   padding-inline: 2rem;
 }
-.btn-primary .btn.bg-outline-primary,
+/* .btn-primary .btn.bg-outline-primary,
 .btn.bg-gradient-primary .btn.bg-outline-primary {
   border: 1px solid #5c5e9b;
 }
@@ -249,13 +250,13 @@ html,
 .show > .btn.bg-gradient-primary.dropdown-toggle {
   color: color-yiq(#5c5e9b);
   background-color: #5c5e9b;
-}
-.btn-primary.focus,
+} */
+/* .btn-primary.focus,
 .btn-primary:focus,
 .btn.bg-gradient-primary.focus,
 .btn.bg-gradient-primary:focus {
   color: #fff;
-}
+} */
 .fixed-plugin .btn.bg-gradient-primary:not(:disabled):not(.disabled) {
   border: 1px solid transparent;
 }
@@ -475,10 +476,93 @@ table th {
   color: var(--tw-gray-700);
 }
 
-.text-primary,
+/* .text-primary,
 .menu-item.active > .menu-link .menu-item-active\:text-primary {
-  color: #5c5e9b !important;
+  color: #fff !important;
+} */
+
+.menu-item.active > .menu-link .menu-item-active\:before\:bg-primary::before {
+  translate: -50% 0%;
+  background-color: #fff !important;
 }
+
+.dark .text-primary,
+.dark .menu-item.active > .menu-link .menu-item-active\:text-primary {
+  color: #fff !important;
+}
+
+/* Dark mode menu-link-hover:text-primary */
+.dark .menu-link:hover.menu-link-hover\:text-primary,
+.dark .menu-link:hover .menu-link-hover\:text-primary {
+  color: #fff !important;
+}
+
+/* Dark mode primary button text color */
+.dark .btn-primary {
+  color: var(--tw-primary-text) !important;
+}
+
+/* .dark .btn-outline.btn-primary,
+.dark .btn-clear.btn-primary,
+.dark .btn-subtle.btn-primary {
+  color: var(--tw-primary-text) !important;
+}
+
+.dark .btn-outline.btn-primary i,
+.dark .btn-clear.btn-primary i,
+.dark .btn-subtle.btn-primary i {
+  color: var(--tw-primary-text) !important;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:focus:active,
+.btn-primary.focus.active {
+  color: #ffffff !important;
+}
+
+.dark .btn-primary:active,
+.dark .btn-primary.active,
+.dark .btn-primary:focus:active,
+.dark .btn-primary.focus.active {
+  color: #ffffff !important;
+}
+
+.btn-outline.btn-primary:active,
+.btn-outline.btn-primary.active,
+.btn-clear.btn-primary:active,
+.btn-clear.btn-primary.active,
+.btn-subtle.btn-primary:active,
+.btn-subtle.btn-primary.active {
+  color: #ffffff !important;
+}
+
+.dark .btn-outline.btn-primary:active,
+.dark .btn-outline.btn-primary.active,
+.dark .btn-clear.btn-primary:active,
+.dark .btn-clear.btn-primary.active,
+.dark .btn-subtle.btn-primary:active,
+.dark .btn-subtle.btn-primary.active {
+  color: #ffffff !important;
+}
+
+.btn-outline.btn-primary:active i,
+.btn-outline.btn-primary.active i,
+.btn-clear.btn-primary:active i,
+.btn-clear.btn-primary.active i,
+.btn-subtle.btn-primary:active i,
+.btn-subtle.btn-primary.active i {
+  color: #ffffff !important;
+}
+
+.dark .btn-outline.btn-primary:active i,
+.dark .btn-outline.btn-primary.active i,
+.dark .btn-clear.btn-primary:active i,
+.dark .btn-clear.btn-primary.active i,
+.dark .btn-subtle.btn-primary:active i,
+.dark .btn-subtle.btn-primary.active i {
+  color: #ffffff !important;
+} */
 
 .MuiFormControl-root,
 .MuiFormControl-root > div {
@@ -499,4 +583,10 @@ table th {
 .css-1chq2cu-MuiFormControl-root-MuiTextField-root
   .MuiInputBase-root:has(input:focus) {
   border-color: var(--tw-primary) !important;
+}
+
+/* Dark mode switch button color */
+.dark .switch input[type="checkbox"]:checked:before,
+.dark .switch input[type="checkbox"][aria-checked="true"]:before {
+  background-color: #5c5e9b !important;
 }

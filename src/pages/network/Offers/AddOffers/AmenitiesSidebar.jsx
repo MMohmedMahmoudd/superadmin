@@ -462,7 +462,7 @@ const AmenitiesSidebar = ({
                     No amenities found
                   </div>
                 ) : (
-                  <div className="grid grid-cols-3 gap-3 pb-4">
+                  <div className="grid grid-cols-4 gap-3 pb-4">
                     {filteredAmenities.map((amenity) => {
                       const isSelected = selectedAmenities.some(
                         (a) => a.id === amenity.id

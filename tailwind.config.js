@@ -120,11 +120,12 @@ module.exports = {
                 inverse: "#ffffff",
               },
               primary: {
-                default: "#5C5E9B",
-                active: "#6A6CB5",
+                default: "#fff",
+                active: "#6A6CB533",
                 light: "#1F2033",
                 clarity: "rgba(92, 94, 155, 0.20)",
                 inverse: "#ffffff",
+                text: "#6a6cb5",
               },
               success: {
                 default: "#00A261",
@@ -217,7 +218,7 @@ module.exports = {
           900: "var(--tw-gray-900)",
         },
         primary: {
-          DEFAULT: "var(--tw-primary)",
+          DEFAULT: "#6a6cb5",
           active: "var(--tw-primary-active)",
           light: "var(--tw-primary-light)",
           clarity: "var(--tw-primary-clarity)",
@@ -554,6 +555,7 @@ module.exports = {
           DEFAULT: {
             height: "1.375rem",
             width: "2.125rem",
+            backgroundColor: "red",
           },
           lg: {
             height: "1.625rem",

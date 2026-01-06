@@ -27,21 +27,58 @@ const StyledMuiTelInput = styled(MuiTelInput)(({ theme }) => ({
     borderRadius: "8px 0 0 8px",
     color: "var(--text)", // ✅ Text color for country code
     position: "relative",
+    height: "50%",
+    borderInlineEnd: "1px solid var(--tw-gray-400)",
+    paddingInlineEnd: "0",
+    cursor: "pointer", // ✅ Make it clear it's clickable
+    pointerEvents: "auto", // ✅ Ensure clicks are enabled
+    userSelect: "none", // ✅ Prevent text selection
+    transition: "background-color 0.2s ease", // ✅ Smooth hover transition
+
+    "&:hover": {
+      backgroundColor: "var(--border-hover-border)", // ✅ Hover effect to indicate clickability
+    },
+
     // Add caret icon after the flag
     "&::after": {
+      position: "absolute",
+      insetInlineEnd: "5px",
+      top: "50%",
+      translate: "30% -60%",
+      pointerEvents: "none",
+
       content: '""',
       display: "inline-block",
       marginLeft: "4px",
-      marginRight: "4px",
+      marginRight: "8px",
       borderLeft: "4px solid transparent",
       borderRight: "4px solid transparent",
       borderTop: "4px solid var(--text)",
       verticalAlign: "middle",
     },
+
     // RTL support
     "[dir='rtl'] &::after": {
       marginLeft: "4px",
       marginRight: "4px",
+    },
+    // Ensure the button inside is also clickable
+    "& button": {
+      position: "relative",
+      cursor: "pointer",
+      pointerEvents: "auto",
+      width: "max(40px, 100%)",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
+      borderRadius: "0px",
+      paddingInlineEnd: "30px",
+    },
+
+    "& button img": {
+      maxWidth: "unset",
+      width: "30px",
     },
   },
   "& .MuiSvgIcon-root": {

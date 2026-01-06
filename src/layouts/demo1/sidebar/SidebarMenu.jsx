@@ -101,7 +101,12 @@ const SidebarMenu = () => {
               iconWidth
             )}
           >
-            {item.icon && <KeenIcon icon={item.icon} className={iconSize} />}
+            {item.icon && (
+              <KeenIcon
+                icon={item.icon}
+                className={`${iconSize} menu-item-active:text-primary menu-link-hover:!text-primary`}
+              />
+            )}
           </MenuIcon>
           <MenuTitle className="text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary">
             {item.title}
